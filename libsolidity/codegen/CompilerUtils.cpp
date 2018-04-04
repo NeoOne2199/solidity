@@ -38,12 +38,16 @@ namespace solidity
 
 const unsigned CompilerUtils::dataStartOffset = 4;
 const size_t CompilerUtils::freeMemoryPointer = 64;
-const size_t CompilerUtils::zeroPointer = CompilerUtils::freeMemoryPointer + 0x20;
+const size_t CompilerUtils::zeroPointer = CompilerUtils::freeMemoryPointer + 32;
+const size_t CompilerUtils::userMemoryPointer = CompilerUtils::zeroPointer + 32;
 const unsigned CompilerUtils::identityContractAddress = 4;
+
+static_assert(CompilerUtils::freeMemoryPointer == 64, "free memory pointer must start at 64");
+static_assert(CompilerUtils::zeroPointer == 96, "zero pointer must be at 96");
+static_assert(CompilerUtils::userMemoryPointer == 128, " user memory must start at or after 128");
 
 void CompilerUtils::initialiseFreeMemoryPointer()
 {
-	solAssert(zeroPointer == CompilerUtils::freeMemoryPointer + 0x20, "");
 	m_context << u256(zeroPointer + 0x20);
 	storeFreeMemoryPointer();
 }

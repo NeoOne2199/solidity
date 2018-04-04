@@ -250,6 +250,8 @@ public:
 	static const size_t freeMemoryPointer;
 	/// Position of the memory slot that is always zero.
 	static const size_t zeroPointer;
+	/// Starting offset for memory available to the user (aka the contract).
+	static const size_t userMemoryPointer;
 
 private:
 	/// Address of the precompiled identity contract.
